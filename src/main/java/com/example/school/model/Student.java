@@ -15,5 +15,5 @@ public class Student {
     private String name;
     private String surname;
     private OffsetDateTime startDate;
-    private Group grade;
+    private Group group;
 }
