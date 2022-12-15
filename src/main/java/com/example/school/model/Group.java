@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class Grade {
+public class Group {
+    private UUID id;
     private String name;
-    private String headTeacherName;
     private List<Student> students;
 }
