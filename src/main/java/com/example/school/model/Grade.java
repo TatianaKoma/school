@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class Student {
+public class Grade {
     private String name;
-    private String surname;
-    private OffsetDateTime startStudying;
-    private Grade grade;
+    private String headTeacherName;
+    private List<Student> students;
 }
