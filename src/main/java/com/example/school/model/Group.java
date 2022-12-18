@@ -5,15 +5,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static java.util.UUID.randomUUID;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 public class Group {
-    private UUID id;
+    @Builder.Default
+    private UUID id = randomUUID();
     private String name;
-    private List<Student> students;
+    @Builder.Default
+    private List<Student> students = new ArrayList<>();
 }
