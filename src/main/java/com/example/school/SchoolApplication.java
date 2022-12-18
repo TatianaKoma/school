@@ -16,9 +16,21 @@ public class SchoolApplication {
     public static void main(String[] args) {
         SpringApplication.run(SchoolApplication.class, args);
 
-        var group1A = new Group(randomUUID(), "1A", new ArrayList<>());
-        var group1B = new Group(randomUUID(), "1B", new ArrayList<>());
-        var group2A = new Group(randomUUID(), "2A", new ArrayList<>());
+        var group1A = Group.builder()
+                .id(randomUUID())
+                .name("1A")
+                .students(new ArrayList<>())
+                .build();
+        var group1B = Group.builder()
+                .id(randomUUID())
+                .name("1B")
+                .students(new ArrayList<>())
+                .build();
+        var group2A = Group.builder()
+                .id(randomUUID())
+                .name("2A")
+                .students(new ArrayList<>())
+                .build();
         var student1 = Student.builder()
                 .id(randomUUID())
                 .name("Igor")
