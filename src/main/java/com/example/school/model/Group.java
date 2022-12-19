@@ -21,5 +21,5 @@ public class Group {
     private String name;
     @Builder.Default
     private List<Student> students = new ArrayList<>();
-    private Teacher headTeacher;
+    private Teacher lead;
 }
