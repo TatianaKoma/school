@@ -36,19 +36,16 @@ public class SchoolApplication {
                 .name("Irina")
                 .surname("Koroseva")
                 .startDate(parse("2000-09-01T09:00:00+01:00"))
-                .subject(subject1)
                 .build();
         var teacher2 = Teacher.builder()
                 .name("Lev")
                 .surname("Fridman")
                 .startDate(parse("2019-09-01T09:00:00+01:00"))
-                .subject(subject5)
                 .build();
         var teacher3 = Teacher.builder()
                 .name("Tamara")
                 .surname("Mishina")
                 .startDate(parse("2016-09-01T09:00:00+01:00"))
-                .subject(subject2)
                 .build();
 
         var group1A = Group.builder()

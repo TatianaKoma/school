@@ -20,5 +20,4 @@ public class Teacher {
     private String name;
     private String surname;
     private OffsetDateTime startDate;
-    private Subject subject;
 }
