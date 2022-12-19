@@ -22,4 +22,6 @@ public class Group {
     @Builder.Default
     private List<Student> students = new ArrayList<>();
     private Teacher lead;
+    @Builder.Default
+    private List<Subject> subjects = new ArrayList<>();
 }
