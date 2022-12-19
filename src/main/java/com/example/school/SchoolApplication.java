@@ -25,12 +25,6 @@ public class SchoolApplication {
         var subject3 = Subject.builder()
                 .name("writing")
                 .build();
-        var subject4 = Subject.builder()
-                .name("english")
-                .build();
-        var subject5 = Subject.builder()
-                .name("science")
-                .build();
 
         var teacher1 = Teacher.builder()
                 .name("Irina")
@@ -119,13 +113,8 @@ public class SchoolApplication {
         var students1A = List.of(student1, student2, student3);
         var students1B = List.of(student4, student5, student6);
         var students2A = List.of(student7, student8, student9);
-        var subjects1 = List.of(subject1, subject2, subject3);
-        var subjects2 = List.of(subject1, subject2, subject3, subject4, subject5);
         group1A.setStudents(students1A);
         group1B.setStudents(students1B);
         group2A.setStudents(students2A);
-        group1A.setSubjects(subjects1);
-        group1B.setSubjects(subjects1);
-        group2A.setSubjects(subjects2);
     }
 }
