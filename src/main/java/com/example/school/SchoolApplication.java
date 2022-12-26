@@ -117,24 +117,8 @@ public class SchoolApplication {
         var students1B = List.of(student4, student5, student6);
         var students2A = List.of(student7, student8, student9);
 
-        var subjectsFor1Group = List.of(maths, writing, reading);
-        var subjectsFor2Group = List.of(maths, writing, reading, english);
-
-        var mathTeachers = List.of(teacher1, teacher3);
-        var readingTeachers = List.of(teacher1, teacher3);
-        var writingTeachers = List.of(teacher1, teacher3);
-        var englishTeachers = List.of(teacher2);
-
         group1A.setStudents(students1A);
         group1B.setStudents(students1B);
         group2A.setStudents(students2A);
-
-        teacher1.setSubjects(subjectsFor1Group);
-        teacher3.setSubjects(subjectsFor2Group);
-
-        maths.setTeachers(mathTeachers);
-        writing.setTeachers(writingTeachers);
-        reading.setTeachers(readingTeachers);
-        english.setTeachers(englishTeachers);
     }
 }
