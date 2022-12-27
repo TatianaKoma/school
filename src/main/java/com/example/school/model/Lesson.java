@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
@@ -20,4 +21,5 @@ public class Lesson {
     private Teacher teacher;
     private Group group;
     private String topic;
+    private OffsetDateTime startDate;
 }

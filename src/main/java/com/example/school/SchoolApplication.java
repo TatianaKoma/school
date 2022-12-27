@@ -120,18 +120,21 @@ public class SchoolApplication {
                 .teacher(teacher1)
                 .group(group1A)
                 .topic("Addition")
+                .startDate(parse("2022-09-21T11:00:00+01:00"))
                 .build();
         var lesson2 = Lesson.builder()
                 .subject(writing)
                 .teacher(teacher3)
                 .group(group1B)
                 .topic("Alphabet")
+                .startDate(parse("2022-09-21T11:00:00+01:00"))
                 .build();
         var lesson3 = Lesson.builder()
                 .subject(english)
                 .teacher(teacher2)
                 .group(group2A)
                 .topic("Articles")
+                .startDate(parse("2022-09-17T12:30:00+01:00"))
                 .build();
 
         var students1A = List.of(student1, student2, student3);
@@ -142,23 +145,20 @@ public class SchoolApplication {
         group1B.setStudents(students1B);
         group2A.setStudents(students2A);
         var mark1 = Mark.builder()
-                .subject(maths)
+                .lesson(lesson1)
                 .student(student1)
-                .mark(12)
-                .date(parse("2022-09-21T11:00:00+01:00"))
+                .value(12)
                 .isPresent(true)
                 .build();
         var mark2 = Mark.builder()
-                .subject(writing)
+                .lesson(lesson2)
                 .student(student2)
-                .mark(10)
-                .date(parse("2022-09-20T10:30:00+01:00"))
+                .value(10)
                 .isPresent(true)
                 .build();
         var mark3 = Mark.builder()
-                .subject(english)
+                .lesson(lesson3)
                 .student(student7)
-                .date(parse("2022-09-17T12:30:00+01:00"))
                 .isPresent(false)
                 .build();
     }

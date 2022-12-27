@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
@@ -17,9 +16,8 @@ import static java.util.UUID.randomUUID;
 public class Mark {
     @Builder.Default
     private UUID id = randomUUID();
-    private Subject subject;
+    private Lesson lesson;
     private Student student;
-    private int mark;
-    private OffsetDateTime date;
+    private int value;
     private boolean isPresent;
 }
