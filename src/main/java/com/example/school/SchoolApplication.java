@@ -2,6 +2,7 @@ package com.example.school;
 
 import com.example.school.model.Group;
 import com.example.school.model.Lesson;
+import com.example.school.model.Mark;
 import com.example.school.model.Student;
 import com.example.school.model.Subject;
 import com.example.school.model.Teacher;
@@ -140,5 +141,25 @@ public class SchoolApplication {
         group1A.setStudents(students1A);
         group1B.setStudents(students1B);
         group2A.setStudents(students2A);
+        var mark1 = Mark.builder()
+                .subject(maths)
+                .student(student1)
+                .mark(12)
+                .date(parse("2022-09-21T11:00:00+01:00"))
+                .isPresent(true)
+                .build();
+        var mark2 = Mark.builder()
+                .subject(writing)
+                .student(student2)
+                .mark(10)
+                .date(parse("2022-09-20T10:30:00+01:00"))
+                .isPresent(true)
+                .build();
+        var mark3 = Mark.builder()
+                .subject(english)
+                .student(student7)
+                .date(parse("2022-09-17T12:30:00+01:00"))
+                .isPresent(false)
+                .build();
     }
 }
