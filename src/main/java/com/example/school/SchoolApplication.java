@@ -1,6 +1,7 @@
 package com.example.school;
 
 import com.example.school.model.Group;
+import com.example.school.model.Lesson;
 import com.example.school.model.Student;
 import com.example.school.model.Subject;
 import com.example.school.model.Teacher;
@@ -111,6 +112,25 @@ public class SchoolApplication {
                 .surname("Minina")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group2A)
+                .build();
+
+        var lesson1 = Lesson.builder()
+                .subject(maths)
+                .teacher(teacher1)
+                .group(group1A)
+                .topic("Addition")
+                .build();
+        var lesson2 = Lesson.builder()
+                .subject(writing)
+                .teacher(teacher3)
+                .group(group1B)
+                .topic("Alphabet")
+                .build();
+        var lesson3 = Lesson.builder()
+                .subject(english)
+                .teacher(teacher2)
+                .group(group2A)
+                .topic("Articles")
                 .build();
 
         var students1A = List.of(student1, student2, student3);
