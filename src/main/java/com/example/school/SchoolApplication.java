@@ -148,18 +148,15 @@ public class SchoolApplication {
                 .lesson(lesson1)
                 .student(student1)
                 .value(12)
-                .isPresent(true)
                 .build();
         var mark2 = Mark.builder()
                 .lesson(lesson2)
                 .student(student2)
                 .value(10)
-                .isPresent(true)
                 .build();
         var mark3 = Mark.builder()
                 .lesson(lesson3)
                 .student(student7)
-                .isPresent(false)
                 .build();
     }
 }

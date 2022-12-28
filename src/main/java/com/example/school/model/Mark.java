@@ -19,5 +19,4 @@ public class Mark {
     private Lesson lesson;
     private Student student;
     private int value;
-    private boolean isPresent;
 }
