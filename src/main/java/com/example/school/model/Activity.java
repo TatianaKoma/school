@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
@@ -13,10 +14,11 @@ import static java.util.UUID.randomUUID;
 @Setter
 @Builder
 @AllArgsConstructor
-public class Mark {
+public class Activity {
     @Builder.Default
     private UUID id = randomUUID();
     private Lesson lesson;
     private Student student;
-    private int value;
+    private Optional<Integer> value;
+    private boolean isPresent;
 }

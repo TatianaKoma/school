@@ -2,7 +2,7 @@ package com.example.school;
 
 import com.example.school.model.Group;
 import com.example.school.model.Lesson;
-import com.example.school.model.Mark;
+import com.example.school.model.Activity;
 import com.example.school.model.Student;
 import com.example.school.model.Subject;
 import com.example.school.model.Teacher;
@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.time.OffsetDateTime.parse;
 
@@ -144,19 +145,23 @@ public class SchoolApplication {
         group1A.setStudents(students1A);
         group1B.setStudents(students1B);
         group2A.setStudents(students2A);
-        var mark1 = Mark.builder()
+        var mark1 = Activity.builder()
                 .lesson(lesson1)
                 .student(student1)
-                .value(12)
+                .value(Optional.of(12))
+                .isPresent(true)
                 .build();
-        var mark2 = Mark.builder()
+        var mark2 = Activity.builder()
                 .lesson(lesson2)
                 .student(student2)
-                .value(10)
+                .value(Optional.of(10))
+                .isPresent(true)
                 .build();
-        var mark3 = Mark.builder()
+        var mark3 = Activity.builder()
                 .lesson(lesson3)
                 .student(student7)
+                .value(Optional.empty())
+                .isPresent(false)
                 .build();
     }
 }
