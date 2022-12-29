@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
@@ -14,12 +14,11 @@ import static java.util.UUID.randomUUID;
 @Setter
 @Builder
 @AllArgsConstructor
-public class Lesson {
+public class Activity {
     @Builder.Default
     private UUID id = randomUUID();
-    private Subject subject;
-    private Teacher teacher;
-    private Group group;
-    private String topic;
-    private OffsetDateTime startDate;
+    private Lesson lesson;
+    private Student student;
+    private Optional<Integer> mark;
+    private boolean isPresent;
 }
