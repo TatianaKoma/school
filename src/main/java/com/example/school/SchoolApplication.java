@@ -148,19 +148,19 @@ public class SchoolApplication {
         var mark1 = Activity.builder()
                 .lesson(lesson1)
                 .student(student1)
-                .value(Optional.of(12))
+                .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
         var mark2 = Activity.builder()
                 .lesson(lesson2)
                 .student(student2)
-                .value(Optional.of(10))
+                .mark(Optional.of(10))
                 .isPresent(true)
                 .build();
         var mark3 = Activity.builder()
                 .lesson(lesson3)
                 .student(student7)
-                .value(Optional.empty())
+                .mark(Optional.empty())
                 .isPresent(false)
                 .build();
     }

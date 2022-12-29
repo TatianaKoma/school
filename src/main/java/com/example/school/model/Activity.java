@@ -19,6 +19,6 @@ public class Activity {
     private UUID id = randomUUID();
     private Lesson lesson;
     private Student student;
-    private Optional<Integer> value;
+    private Optional<Integer> mark;
     private boolean isPresent;
 }
