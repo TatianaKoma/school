@@ -1,48 +1,48 @@
-CREATE TABLE teacher
+CREATE TABLE teachers
 (
     id        UUID PRIMARY KEY         NOT NULL,
-    name      VARCHAR(50)              NOT NULL,
-    surname   VARCHAR(50)              NOT NULL,
+    name      TEXT                     NOT NULL,
+    surname   TEXT                     NOT NULL,
     startDate TIMESTAMP WITH TIME ZONE NOT NULL
 );
 
-CREATE TABLE "group"
+CREATE TABLE "groups"
 (
     id      UUID PRIMARY KEY NOT NULL,
-    name    VARCHAR(50)      NOT NULL,
-    teacher teacher          NOT NULL
+    name    TEXT             NOT NULL,
+    teacher teachers         NOT NULL
 );
 
-CREATE TABLE subject
+CREATE TABLE subjects
 (
     id   UUID PRIMARY KEY NOT NULL,
-    name VARCHAR(50)      NOT NULL
+    name TEXT             NOT NULL
 );
 
-CREATE TABLE student
+CREATE TABLE students
 (
     id        UUID PRIMARY KEY         NOT NULL,
-    name      VARCHAR(50)              NOT NULL,
-    surname   VARCHAR(50)              NOT NULL,
+    name      TEXT                     NOT NULL,
+    surname   TEXT                     NOT NULL,
     startDate TIMESTAMP WITH TIME ZONE NOT NULL,
-    "group"   "group"                  NOT NULL
+    "group"   "groups"                 NOT NULL
 );
 
-CREATE TABLE lesson
+CREATE TABLE lessons
 (
     id        UUID PRIMARY KEY         NOT NULL,
-    subject   subject                  NOT NULL,
-    teacher   teacher                  NOT NULL,
-    "group"   "group"                  NOT NULL,
-    topic     VARCHAR(50)              NOT NULL,
+    subject   subjects                 NOT NULL,
+    teacher   teachers                 NOT NULL,
+    "group"   "groups"                 NOT NULL,
+    topic     TEXT                     NOT NULL,
     startDate TIMESTAMP WITH TIME ZONE NOT NULL
 );
 
-CREATE TABLE activity
+CREATE TABLE activities
 (
-    id       UUID PRIMARY KEY NOT NULL,
-    lesson   lesson           NOT NULL,
-    student  student          NOT NULL,
-    mark     INT,
+    id        UUID PRIMARY KEY NOT NULL,
+    lesson    lessons          NOT NULL,
+    student   students         NOT NULL,
+    mark      INT,
     isPresent boolean          NOT NULL
 );
