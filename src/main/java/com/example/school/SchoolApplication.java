@@ -9,8 +9,12 @@ import com.example.school.model.Teacher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.time.OffsetDateTime.parse;
 
@@ -163,5 +167,43 @@ public class SchoolApplication {
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
+        var mark4 = Activity.builder()
+                .lesson(lesson3)
+                .student(student2)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+        var mark5 = Activity.builder()
+                .lesson(lesson3)
+                .student(student2)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+
+        List<Activity> activities = List.of(mark1, mark2, mark3, mark4, mark5);
+        System.out.println(getTheWorstSchoolTruant(activities));
+    }
+
+    private static List<Student> getTheWorstSchoolTruant(List<Activity> activities) {
+        Map<Student, Integer> amountTruanciesEachStudent = new HashMap<>();
+        for (Activity activity : activities) {
+            int countTruancy = 1;
+            if (!activity.isPresent()) {
+                if (!amountTruanciesEachStudent.containsKey(activity.getStudent())) {
+                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                } else {
+                    countTruancy = amountTruanciesEachStudent.get(activity.getStudent());
+                    countTruancy++;
+                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                }
+            }
+        }
+        int maxAmountOfTruancies = amountTruanciesEachStudent.values().stream()
+                .max(Integer::compareTo).orElse(-1);
+        return amountTruanciesEachStudent.entrySet().stream()
+                .filter(e -> e.getValue() == maxAmountOfTruancies)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
     }
 }
