@@ -149,41 +149,42 @@ public class SchoolApplication {
         group1A.setStudents(students1A);
         group1B.setStudents(students1B);
         group2A.setStudents(students2A);
-        var mark1 = Activity.builder()
+        var activity1 = Activity.builder()
                 .lesson(lesson1)
                 .student(student1)
                 .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
-        var mark2 = Activity.builder()
+        var activity2 = Activity.builder()
                 .lesson(lesson2)
                 .student(student2)
                 .mark(Optional.of(10))
                 .isPresent(true)
                 .build();
-        var mark3 = Activity.builder()
+        var activity3 = Activity.builder()
                 .lesson(lesson3)
                 .student(student7)
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
-        var mark4 = Activity.builder()
-                .lesson(lesson3)
+        var activity4 = Activity.builder()
+                .lesson(lesson1)
                 .student(student2)
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
-        var mark5 = Activity.builder()
+        var activity5 = Activity.builder()
                 .lesson(lesson3)
                 .student(student2)
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
 
-        List<Activity> activities = List.of(mark1, mark2, mark3, mark4, mark5);
+        var activities = List.of(activity1, activity2, activity3, activity4, activity5);
         System.out.println(getTheWorstSchoolTruant(activities));
     }
 
+    // method that gets a list of students from the school who skipped the most lessons
     private static List<Student> getTheWorstSchoolTruant(List<Activity> activities) {
         Map<Student, Integer> amountTruanciesEachStudent = new HashMap<>();
         for (Activity activity : activities) {
@@ -207,6 +208,7 @@ public class SchoolApplication {
 
     }
 
+    // method that gets a list of students from the group who skipped the most lessons
     private static List<Student> getTheWorstGroupTruant(Group group, List<Activity> activities) {
         Map<Student, Integer> amountTruanciesEachStudent = new HashMap<>();
         for (Activity activity : activities) {
