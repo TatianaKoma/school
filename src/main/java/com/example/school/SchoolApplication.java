@@ -206,4 +206,26 @@ public class SchoolApplication {
                 .collect(Collectors.toList());
 
     }
+
+    private static List<Student> getTheWorstGroupTruant(Group group, List<Activity> activities) {
+        Map<Student, Integer> amountTruanciesEachStudent = new HashMap<>();
+        for (Activity activity : activities) {
+            int countTruancy = 1;
+            if (!activity.isPresent() && activity.getStudent().getGroup().equals(group)) {
+                if (!amountTruanciesEachStudent.containsKey(activity.getStudent())) {
+                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                } else {
+                    countTruancy = amountTruanciesEachStudent.get(activity.getStudent());
+                    countTruancy++;
+                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                }
+            }
+        }
+        int maxAmountOfTruancies = amountTruanciesEachStudent.values().stream()
+                .max(Integer::compareTo).orElse(-1);
+        return amountTruanciesEachStudent.entrySet().stream()
+                .filter(e -> e.getValue() == maxAmountOfTruancies)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
 }
