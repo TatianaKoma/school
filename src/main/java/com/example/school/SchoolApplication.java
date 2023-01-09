@@ -9,8 +9,12 @@ import com.example.school.model.Teacher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.time.OffsetDateTime.parse;
 
@@ -145,23 +149,85 @@ public class SchoolApplication {
         group1A.setStudents(students1A);
         group1B.setStudents(students1B);
         group2A.setStudents(students2A);
-        var mark1 = Activity.builder()
+        var activity1 = Activity.builder()
                 .lesson(lesson1)
                 .student(student1)
                 .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
-        var mark2 = Activity.builder()
+        var activity2 = Activity.builder()
                 .lesson(lesson2)
                 .student(student2)
                 .mark(Optional.of(10))
                 .isPresent(true)
                 .build();
-        var mark3 = Activity.builder()
+        var activity3 = Activity.builder()
                 .lesson(lesson3)
                 .student(student7)
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
+        var activity4 = Activity.builder()
+                .lesson(lesson1)
+                .student(student2)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+        var activity5 = Activity.builder()
+                .lesson(lesson3)
+                .student(student2)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+
+        var activities = List.of(activity1, activity2, activity3, activity4, activity5);
+        System.out.println(getTheWorstSchoolTruant(activities));
+    }
+
+    // method that gets a list of students from the school who skipped the most lessons
+    private static List<Student> getTheWorstSchoolTruant(List<Activity> activities) {
+        Map<Student, Integer> amountTruanciesEachStudent = new HashMap<>();
+        for (Activity activity : activities) {
+            int countTruancy = 1;
+            if (!activity.isPresent()) {
+                if (!amountTruanciesEachStudent.containsKey(activity.getStudent())) {
+                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                } else {
+                    countTruancy = amountTruanciesEachStudent.get(activity.getStudent());
+                    countTruancy++;
+                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                }
+            }
+        }
+        int maxAmountOfTruancies = amountTruanciesEachStudent.values().stream()
+                .max(Integer::compareTo).orElse(-1);
+        return amountTruanciesEachStudent.entrySet().stream()
+                .filter(e -> e.getValue() == maxAmountOfTruancies)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+    }
+
+    // method that gets a list of students from the group who skipped the most lessons
+    private static List<Student> getTheWorstGroupTruant(Group group, List<Activity> activities) {
+        Map<Student, Integer> amountTruanciesEachStudent = new HashMap<>();
+        for (Activity activity : activities) {
+            int countTruancy = 1;
+            if (!activity.isPresent() && activity.getStudent().getGroup().equals(group)) {
+                if (!amountTruanciesEachStudent.containsKey(activity.getStudent())) {
+                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                } else {
+                    countTruancy = amountTruanciesEachStudent.get(activity.getStudent());
+                    countTruancy++;
+                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                }
+            }
+        }
+        int maxAmountOfTruancies = amountTruanciesEachStudent.values().stream()
+                .max(Integer::compareTo).orElse(-1);
+        return amountTruanciesEachStudent.entrySet().stream()
+                .filter(e -> e.getValue() == maxAmountOfTruancies)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 }
