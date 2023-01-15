@@ -8,10 +8,7 @@ import com.example.school.model.Subject;
 import com.example.school.model.Teacher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.yaml.snakeyaml.error.Mark;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -195,98 +192,33 @@ public class SchoolApplication {
                 .build();
 
         var activities = List.of(activity1, activity2, activity3, activity4, activity5);
-        var activities1 = List.of(activity1, activity2, activity3, activity4, activity5, activity6, activity7);
-        System.out.println(getTheWorstTruantInSchool(activities));
-        System.out.println(getListOfTopGoodStudentsInSchool(activities1));
+        System.out.println(findBestTruantsInSchool(activities));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
-    private static List<Student> getTheWorstTruantInSchool(List<Activity> activities) {
+    private static List<Student> findBestTruantsInSchool(List<Activity> activities) {
+        var amountSkippedLessonsForEachStudent = countSkippedLessonsForEachStudent(activities);
+        int maxAmountOfTruancies = amountSkippedLessonsForEachStudent.values().stream()
+                .max(Integer::compareTo)
+                .orElse(-1);
+        return amountSkippedLessonsForEachStudent.entrySet().stream()
+                .filter(e -> e.getValue() == maxAmountOfTruancies)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    private static Map<Student, Integer> countSkippedLessonsForEachStudent(List<Activity> activities) {
         Map<Student, Integer> amountTruanciesEachStudent = new HashMap<>();
-        for (Activity activity : activities) {
-            int countTruancy = 1;
+        for (var activity : activities) {
             if (!activity.isPresent()) {
-                if (!amountTruanciesEachStudent.containsKey(activity.getStudent())) {
-                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
-                } else {
-                    countTruancy = amountTruanciesEachStudent.get(activity.getStudent());
-                    countTruancy++;
-                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
+                var student = activity.getStudent();
+                var skippedLesson = 1;
+                if (amountTruanciesEachStudent.containsKey(student)) {
+                    skippedLesson = amountTruanciesEachStudent.get(student) + 1;
                 }
+                amountTruanciesEachStudent.put(student, skippedLesson);
             }
         }
-        int maxAmountOfTruancies = amountTruanciesEachStudent.values().stream()
-                .max(Integer::compareTo).orElse(-1);
-        return amountTruanciesEachStudent.entrySet().stream()
-                .filter(e -> e.getValue() == maxAmountOfTruancies)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-
-    }
-
-    // method that gets a list of students from the group who skipped the most lessons
-    private static List<Student> getTheWorstTruantInGroup(Group group, List<Activity> activities) {
-        Map<Student, Integer> amountTruanciesEachStudent = new HashMap<>();
-        for (Activity activity : activities) {
-            int countTruancy = 1;
-            if (!activity.isPresent() && activity.getStudent().getGroup().equals(group)) {
-                if (!amountTruanciesEachStudent.containsKey(activity.getStudent())) {
-                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
-                } else {
-                    countTruancy = amountTruanciesEachStudent.get(activity.getStudent());
-                    countTruancy++;
-                    amountTruanciesEachStudent.put(activity.getStudent(), countTruancy);
-                }
-            }
-        }
-        int maxAmountOfTruancies = amountTruanciesEachStudent.values().stream()
-                .max(Integer::compareTo).orElse(-1);
-        return amountTruanciesEachStudent.entrySet().stream()
-                .filter(e -> e.getValue() == maxAmountOfTruancies)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-    }
-
-    // method that gets a list of 3 students from school who are getting only good marks
-    private static List<Student> getListOfTopGoodStudentsInSchool(List<Activity> activities) {
-        Map<Student, List<Integer>> studentsWithMarks = new HashMap<>();
-        for (Activity activity : activities) {
-            if (markIsInRange(activity)) {
-                if (!studentsWithMarks.containsKey(activity.getStudent())) {
-                    var marks = new ArrayList<Integer>();
-                    marks.add(activity.getMark().orElseThrow());
-                    studentsWithMarks.put(activity.getStudent(), marks);
-                } else {
-                    var marks = studentsWithMarks.get(activity.getStudent());
-                    marks.add(activity.getMark().orElseThrow());
-                    studentsWithMarks.put(activity.getStudent(), marks);
-                }
-            }
-        }
-        Map<Student, Double> studentsWithAverageMark = new HashMap<>();
-        for (Map.Entry<Student, List<Integer>> entry : studentsWithMarks.entrySet()) {
-            studentsWithAverageMark.put(entry.getKey(), getAverageMark(entry.getValue()));
-        }
-        return studentsWithAverageMark.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
-                .limit(3)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-    }
-
-    private static boolean markIsInRange(Activity activity) {
-        if (activity.getMark().isEmpty()) {
-            return false;
-        }
-        return Optional.ofNullable(activity.getMark())
-                .filter(mark -> mark.get() >= 8)
-                .filter(mark -> mark.get() <= 12)
-                .isPresent();
-    }
-
-    private static double getAverageMark(List<Integer> marks) {
-        return marks.stream()
-                .mapToInt(Integer::intValue)
-                .average().orElseThrow();
+        return amountTruanciesEachStudent;
     }
 }
