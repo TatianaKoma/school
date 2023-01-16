@@ -182,7 +182,7 @@ public class SchoolApplication {
                 .lesson(lesson3)
                 .student(student6)
                 .mark(Optional.of(9))
-                .isPresent(false)
+                .isPresent(true)
                 .build();
         var activity7 = Activity.builder()
                 .lesson(lesson3)
