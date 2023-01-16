@@ -190,7 +190,12 @@ public class SchoolApplication {
                 .mark(Optional.of(5))
                 .isPresent(true)
                 .build();
-
+        var activity8 = Activity.builder()
+                .lesson(lesson1)
+                .student(student7)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
         var activities = List.of(activity1, activity2, activity3, activity4, activity5);
         System.out.println(findBestTruantsInSchool(activities));
     }

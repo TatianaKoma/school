@@ -40,4 +40,5 @@ VALUES ('313832ff-a5b5-4463-8817-d87ae377523e', 'a6ae5189-f528-4bed-837a-c4d56cf
        ('313832ff-a5b5-4463-8817-d87ae377523e', '085fc066-113c-4065-93cc-d3ab16bcf4e7', null, false),
        ('ac62087a-b0d8-42a5-baa9-759be486bee0', '085fc066-113c-4065-93cc-d3ab16bcf4e7', null, false),
        ('ac62087a-b0d8-42a5-baa9-759be486bee0', 'd98cd650-c82f-4db4-a81d-b1c50a16fbce', 9, true),
-       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '092cc6bb-2e10-496d-848e-3580d12fe3d6', 5, true);
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '092cc6bb-2e10-496d-848e-3580d12fe3d6', 5, true),
+       ('313832ff-a5b5-4463-8817-d87ae377523e', '092cc6bb-2e10-496d-848e-3580d12fe3d6', null, false);
