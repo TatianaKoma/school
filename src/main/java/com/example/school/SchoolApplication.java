@@ -197,7 +197,9 @@ public class SchoolApplication {
                 .isPresent(false)
                 .build();
         var activities = List.of(activity1, activity2, activity3, activity4, activity5);
+        var activities1 = List.of(activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8);
         System.out.println(findBestTruantsInSchool(activities));
+        System.out.println(findBestTruantsInGroup(activities1, group2A));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
@@ -207,6 +209,21 @@ public class SchoolApplication {
                 .max(Integer::compareTo)
                 .orElse(-1);
         return amountSkippedLessonsForEachStudent.entrySet().stream()
+                .filter(e -> e.getValue() == maxAmountOfTruancies)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    // method that gets a list of students from the group who skipped the most lessons
+    private static List<Student> findBestTruantsInGroup(List<Activity> activities, Group group) {
+        var amountSkippedLessonsForEachStudentFromSchool = countSkippedLessonsForEachStudent(activities);
+        var amountSkippedLessonsForEachStudentFromGroup = amountSkippedLessonsForEachStudentFromSchool.entrySet().stream()
+                .filter(e -> e.getKey().getGroup().equals(group))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        int maxAmountOfTruancies = amountSkippedLessonsForEachStudentFromGroup.values().stream()
+                .max(Integer::compareTo).orElse(-1);
+        return amountSkippedLessonsForEachStudentFromGroup.entrySet().stream()
                 .filter(e -> e.getValue() == maxAmountOfTruancies)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
