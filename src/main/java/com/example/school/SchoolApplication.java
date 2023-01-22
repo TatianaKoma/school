@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static java.time.OffsetDateTime.parse;
@@ -204,11 +205,11 @@ public class SchoolApplication {
 
     // method that gets a list of students from the school who skipped the most lessons
     private static List<Student> findBestTruantsInSchool(List<Activity> activities) {
-        var amountSkippedLessonsForEachStudent = countSkippedLessonsForEachStudent(activities);
-        int maxAmountOfTruancies = amountSkippedLessonsForEachStudent.values().stream()
+        var amountSkippedLessonsForEachStudentFromSchool = countSkippedLessonsForEachStudent(activities);
+        int maxAmountOfTruancies = amountSkippedLessonsForEachStudentFromSchool.values().stream()
                 .max(Integer::compareTo)
                 .orElse(-1);
-        return amountSkippedLessonsForEachStudent.entrySet().stream()
+        return amountSkippedLessonsForEachStudentFromSchool.entrySet().stream()
                 .filter(e -> e.getValue() == maxAmountOfTruancies)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
@@ -216,17 +217,10 @@ public class SchoolApplication {
 
     // method that gets a list of students from the group who skipped the most lessons
     private static List<Student> findBestTruantsInGroup(List<Activity> activities, Group group) {
-        var amountSkippedLessonsForEachStudentFromSchool = countSkippedLessonsForEachStudent(activities);
-        var amountSkippedLessonsForEachStudentFromGroup = amountSkippedLessonsForEachStudentFromSchool.entrySet().stream()
-                .filter(e -> e.getKey().getGroup().equals(group))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-        int maxAmountOfTruancies = amountSkippedLessonsForEachStudentFromGroup.values().stream()
-                .max(Integer::compareTo).orElse(-1);
-        return amountSkippedLessonsForEachStudentFromGroup.entrySet().stream()
-                .filter(e -> e.getValue() == maxAmountOfTruancies)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+        var activitiesForGroup = activities.stream()
+                .filter(e -> e.getStudent().getGroup().equals(group))
+                .toList();
+        return findBestTruantsInSchool(activitiesForGroup);
     }
 
     private static Map<Student, Integer> countSkippedLessonsForEachStudent(List<Activity> activities) {
