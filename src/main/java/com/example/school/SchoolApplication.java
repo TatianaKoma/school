@@ -200,7 +200,7 @@ public class SchoolApplication {
         var activities = List.of(activity1, activity2, activity3, activity4, activity5);
         var activities1 = List.of(activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8);
         System.out.println(findBestTruantsInSchool(activities));
-        System.out.println(findBestTruantsInGroup(activities1, group2A));
+        System.out.println(findBestTruantsInGroup(activities1, UUID.fromString("0f020adb-3cd0-46d7-8529-29d735235477")));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
@@ -216,9 +216,9 @@ public class SchoolApplication {
     }
 
     // method that gets a list of students from the group who skipped the most lessons
-    private static List<Student> findBestTruantsInGroup(List<Activity> activities, Group group) {
+    private static List<Student> findBestTruantsInGroup(List<Activity> activities, UUID groupId) {
         var activitiesForGroup = activities.stream()
-                .filter(e -> e.getStudent().getGroup().equals(group))
+                .filter(e -> e.getStudent().getGroup().getId().equals(groupId))
                 .toList();
         return findBestTruantsInSchool(activitiesForGroup);
     }
