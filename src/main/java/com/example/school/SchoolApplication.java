@@ -241,23 +241,21 @@ public class SchoolApplication {
     }
 
     // method that gets a list of 3 students from school who are getting only good marks
-    private static List<Student> find3BestStudentsInSchool(List<Activity> activities) {
-        Map<Student, List<Integer>> studentsWithMarks = new HashMap<>();
+    private static List<UUID> find3BestStudentsInSchool(List<Activity> activities) {
+        Map<UUID, List<Integer>> studentsWithMarks = new HashMap<>();
         for (Activity activity : activities) {
             if (isMarkInRange(activity)) {
-                if (!studentsWithMarks.containsKey(activity.getStudent())) {
-                    var marks = new ArrayList<Integer>();
-                    marks.add(activity.getMark().orElseThrow());
-                    studentsWithMarks.put(activity.getStudent(), marks);
-                } else {
-                    var marks = studentsWithMarks.get(activity.getStudent());
-                    marks.add(activity.getMark().orElseThrow());
-                    studentsWithMarks.put(activity.getStudent(), marks);
+                var marks = new ArrayList<Integer>();
+                if (studentsWithMarks.containsKey(activity.getStudent().getId())) {
+                    marks = (ArrayList<Integer>) studentsWithMarks.get(activity.getStudent().getId());
                 }
+                marks.add(activity.getMark().orElseThrow());
+                studentsWithMarks.put(activity.getStudent().getId(), marks);
             }
         }
-        Map<Student, Double> studentsWithAverageMark = new HashMap<>();
-        for (Map.Entry<Student, List<Integer>> entry : studentsWithMarks.entrySet()) {
+
+        Map<UUID, Double> studentsWithAverageMark = new HashMap<>();
+        for (Map.Entry<UUID, List<Integer>> entry : studentsWithMarks.entrySet()) {
             studentsWithAverageMark.put(entry.getKey(), getAverageMark(entry.getValue()));
         }
         return studentsWithAverageMark.entrySet().stream()
