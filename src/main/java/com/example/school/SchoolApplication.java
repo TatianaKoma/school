@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static java.time.OffsetDateTime.parse;
@@ -197,19 +198,29 @@ public class SchoolApplication {
                 .isPresent(false)
                 .build();
         var activities = List.of(activity1, activity2, activity3, activity4, activity5);
+        var activities1 = List.of(activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8);
         System.out.println(findBestTruantsInSchool(activities));
+        System.out.println(findBestTruantsInGroup(activities1, group2A.getId()));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
     private static List<Student> findBestTruantsInSchool(List<Activity> activities) {
-        var amountSkippedLessonsForEachStudent = countSkippedLessonsForEachStudent(activities);
-        int maxAmountOfTruancies = amountSkippedLessonsForEachStudent.values().stream()
+        var amountSkippedLessonsForEachStudentFromSchool = countSkippedLessonsForEachStudent(activities);
+        int maxAmountOfTruancies = amountSkippedLessonsForEachStudentFromSchool.values().stream()
                 .max(Integer::compareTo)
                 .orElse(-1);
-        return amountSkippedLessonsForEachStudent.entrySet().stream()
+        return amountSkippedLessonsForEachStudentFromSchool.entrySet().stream()
                 .filter(e -> e.getValue() == maxAmountOfTruancies)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
+    }
+
+    // method that gets a list of students from the group who skipped the most lessons
+    private static List<Student> findBestTruantsInGroup(List<Activity> activities, UUID groupId) {
+        var activitiesForGroup = activities.stream()
+                .filter(e -> e.getStudent().getGroup().getId().equals(groupId))
+                .toList();
+        return findBestTruantsInSchool(activitiesForGroup);
     }
 
     private static Map<Student, Integer> countSkippedLessonsForEachStudent(List<Activity> activities) {
