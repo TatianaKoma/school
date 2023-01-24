@@ -42,3 +42,6 @@ VALUES ('313832ff-a5b5-4463-8817-d87ae377523e', 'a6ae5189-f528-4bed-837a-c4d56cf
        ('ac62087a-b0d8-42a5-baa9-759be486bee0', 'd98cd650-c82f-4db4-a81d-b1c50a16fbce', 9, true),
        ('ac62087a-b0d8-42a5-baa9-759be486bee0', '092cc6bb-2e10-496d-848e-3580d12fe3d6', 5, true),
        ('313832ff-a5b5-4463-8817-d87ae377523e', '092cc6bb-2e10-496d-848e-3580d12fe3d6', null, false);
+
+INSERT INTO activities (lesson_id, student_id, mark, is_present)
+VALUES ('e824617f-2231-43db-96e1-350d1ebbacef', 'a6ae5189-f528-4bed-837a-c4d56cf9b6bb', 10, true);

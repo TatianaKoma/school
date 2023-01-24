@@ -9,6 +9,7 @@ import com.example.school.model.Teacher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -201,6 +202,7 @@ public class SchoolApplication {
         var activities1 = List.of(activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8);
         System.out.println(findBestTruantsInSchool(activities));
         System.out.println(findBestTruantsInGroup(activities1, group2A.getId()));
+        System.out.println(find3BestStudentsInSchool(activities1));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
@@ -236,5 +238,48 @@ public class SchoolApplication {
             }
         }
         return amountTruanciesEachStudent;
+    }
+
+    // method that gets a list of 3 students from school who are getting only good marks
+    private static List<Student> find3BestStudentsInSchool(List<Activity> activities) {
+        Map<Student, List<Integer>> studentsWithMarks = new HashMap<>();
+        for (Activity activity : activities) {
+            if (isMarkInRange(activity)) {
+                if (!studentsWithMarks.containsKey(activity.getStudent())) {
+                    var marks = new ArrayList<Integer>();
+                    marks.add(activity.getMark().orElseThrow());
+                    studentsWithMarks.put(activity.getStudent(), marks);
+                } else {
+                    var marks = studentsWithMarks.get(activity.getStudent());
+                    marks.add(activity.getMark().orElseThrow());
+                    studentsWithMarks.put(activity.getStudent(), marks);
+                }
+            }
+        }
+        Map<Student, Double> studentsWithAverageMark = new HashMap<>();
+        for (Map.Entry<Student, List<Integer>> entry : studentsWithMarks.entrySet()) {
+            studentsWithAverageMark.put(entry.getKey(), getAverageMark(entry.getValue()));
+        }
+        return studentsWithAverageMark.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .limit(3)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    private static boolean isMarkInRange(Activity activity) {
+        if (activity.getMark().isEmpty()) {
+            return false;
+        }
+        return Optional.ofNullable(activity.getMark())
+                .filter(mark -> mark.get() >= 8)
+                .filter(mark -> mark.get() <= 12)
+                .isPresent();
+    }
+
+    private static double getAverageMark(List<Integer> marks) {
+        return marks.stream()
+                .mapToInt(Integer::intValue)
+                .average().orElseThrow();
     }
 }
