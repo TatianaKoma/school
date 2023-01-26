@@ -25,15 +25,14 @@ WITH truants AS (SELECT student_id,
                  FROM activities AS a
                           JOIN students AS s ON s.id = a.student_id
                  WHERE is_present = false
-                   AND s.group_id = '0f020adb-3cd0-46d7-8529-29d735235477'
+                   AND s.group_id = 'b31fe8ed-c37a-4815-8c2a-4c413d8b138a'
                  GROUP BY student_id)
 SELECT student_id, truancies
 FROM truants
 WHERE truancies_rank = 1;
 
-SELECT student_id, AVG(mark) AS avg_mark
+SELECT student_id, AVG(COALESCE(mark,0)) AS avg_mark
 FROM activities
-WHERE mark BETWEEN 8 AND 12
 GROUP BY student_id
 ORDER BY avg_mark DESC
 LIMIT 3;
