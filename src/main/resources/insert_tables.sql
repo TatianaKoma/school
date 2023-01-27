@@ -35,10 +35,17 @@ VALUES ('a720cc69-6546-4607-b664-2ce1601f7d49', '5d371d6c-7d15-470e-be73-844fdb7
 
 INSERT INTO activities (lesson_id, student_id, mark, is_present)
 VALUES ('313832ff-a5b5-4463-8817-d87ae377523e', 'a6ae5189-f528-4bed-837a-c4d56cf9b6bb', 12, true),
+       ('e824617f-2231-43db-96e1-350d1ebbacef', 'a6ae5189-f528-4bed-837a-c4d56cf9b6bb', 12, true),
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', 'a6ae5189-f528-4bed-837a-c4d56cf9b6bb', 12, true),
+
+       ('313832ff-a5b5-4463-8817-d87ae377523e', '085fc066-113c-4065-93cc-d3ab16bcf4e7', 10, true),
        ('e824617f-2231-43db-96e1-350d1ebbacef', '085fc066-113c-4065-93cc-d3ab16bcf4e7', 10, true),
-       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '092cc6bb-2e10-496d-848e-3580d12fe3d6', null, false),
-       ('313832ff-a5b5-4463-8817-d87ae377523e', '085fc066-113c-4065-93cc-d3ab16bcf4e7', null, false),
-       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '085fc066-113c-4065-93cc-d3ab16bcf4e7', null, false),
-       ('ac62087a-b0d8-42a5-baa9-759be486bee0', 'd98cd650-c82f-4db4-a81d-b1c50a16fbce', 9, true),
-       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '092cc6bb-2e10-496d-848e-3580d12fe3d6', 5, true),
-       ('313832ff-a5b5-4463-8817-d87ae377523e', '092cc6bb-2e10-496d-848e-3580d12fe3d6', null, false);
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '085fc066-113c-4065-93cc-d3ab16bcf4e7', 10, true),
+
+       ('313832ff-a5b5-4463-8817-d87ae377523e', 'b59cbbb6-ab12-441b-8f1f-e7dcdffd2010', 12, true),
+       ('e824617f-2231-43db-96e1-350d1ebbacef', 'b59cbbb6-ab12-441b-8f1f-e7dcdffd2010', null, false),
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', 'b59cbbb6-ab12-441b-8f1f-e7dcdffd2010', null, false),
+
+       ('313832ff-a5b5-4463-8817-d87ae377523e', '0e16ddd0-a9f3-4f5e-901b-824808cd4aa3', null, false),
+       ('e824617f-2231-43db-96e1-350d1ebbacef', '0e16ddd0-a9f3-4f5e-901b-824808cd4aa3', null, false),
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '0e16ddd0-a9f3-4f5e-901b-824808cd4aa3', null, false);
