@@ -49,3 +49,24 @@ VALUES ('313832ff-a5b5-4463-8817-d87ae377523e', 'a6ae5189-f528-4bed-837a-c4d56cf
        ('313832ff-a5b5-4463-8817-d87ae377523e', '0e16ddd0-a9f3-4f5e-901b-824808cd4aa3', null, false),
        ('e824617f-2231-43db-96e1-350d1ebbacef', '0e16ddd0-a9f3-4f5e-901b-824808cd4aa3', null, false),
        ('ac62087a-b0d8-42a5-baa9-759be486bee0', '0e16ddd0-a9f3-4f5e-901b-824808cd4aa3', null, false);
+
+INSERT INTO activities (lesson_id, student_id, mark, is_present)
+VALUES ('313832ff-a5b5-4463-8817-d87ae377523e', 'bae0921b-f143-4ce8-ac0d-6b56b68de7da', 7, true),
+       ('e824617f-2231-43db-96e1-350d1ebbacef', 'bae0921b-f143-4ce8-ac0d-6b56b68de7da', 6, true),
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', 'bae0921b-f143-4ce8-ac0d-6b56b68de7da', 5, true),
+
+       ('313832ff-a5b5-4463-8817-d87ae377523e', 'd98cd650-c82f-4db4-a81d-b1c50a16fbce', 10, true),
+       ('e824617f-2231-43db-96e1-350d1ebbacef', 'd98cd650-c82f-4db4-a81d-b1c50a16fbce', 9, true),
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', 'd98cd650-c82f-4db4-a81d-b1c50a16fbce', 5, true),
+
+       ('313832ff-a5b5-4463-8817-d87ae377523e', '092cc6bb-2e10-496d-848e-3580d12fe3d6', 12, true),
+       ('e824617f-2231-43db-96e1-350d1ebbacef', '092cc6bb-2e10-496d-848e-3580d12fe3d6', 10, true),
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '092cc6bb-2e10-496d-848e-3580d12fe3d6', null, true),
+
+       ('313832ff-a5b5-4463-8817-d87ae377523e', '18eee600-30d1-436c-a213-2886668f81cd', 5, true),
+       ('e824617f-2231-43db-96e1-350d1ebbacef', '18eee600-30d1-436c-a213-2886668f81cd', null, false),
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '18eee600-30d1-436c-a213-2886668f81cd', 6, true),
+
+       ('313832ff-a5b5-4463-8817-d87ae377523e', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 12, true),
+       ('e824617f-2231-43db-96e1-350d1ebbacef', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 9, true),
+       ('ac62087a-b0d8-42a5-baa9-759be486bee0', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', null, false);

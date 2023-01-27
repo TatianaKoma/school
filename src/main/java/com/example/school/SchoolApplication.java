@@ -244,6 +244,7 @@ public class SchoolApplication {
         System.out.println(findBestTruantsInGroup(activities, group1A.getId()));
         System.out.println(find3BestStudentsInSchool(activities));
         System.out.println(find3BestStudentsInSchoolStream(activities));
+        System.out.println(find3BestStudentsInGroupStream(activities,group1A.getId()));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
@@ -260,9 +261,7 @@ public class SchoolApplication {
 
     // method that gets a list of students from the group who skipped the most lessons
     private static List<Student> findBestTruantsInGroup(List<Activity> activities, UUID groupId) {
-        var activitiesForGroup = activities.stream()
-                .filter(e -> e.getStudent().getGroup().getId().equals(groupId))
-                .toList();
+        var activitiesForGroup = findActivitiesForSpecificGroup(activities, groupId);
         return findBestTruantsInSchool(activitiesForGroup);
     }
 
@@ -310,7 +309,7 @@ public class SchoolApplication {
                 .average().orElseThrow();
     }
 
-    // method that gets a list of 3 students from school who have higher average marks, using stream
+    // method that gets a list of 3 students from school who have higher average marks from school, using stream
     private static List<UUID> find3BestStudentsInSchoolStream(List<Activity> activities) {
         Map<UUID, Double> studentAverageMark = activities.stream()
                 .collect(groupingBy((e -> e.getStudent().getId()), averagingDouble(e -> e.getMark().orElse(0))));
@@ -319,6 +318,18 @@ public class SchoolApplication {
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(3)
                 .map(Map.Entry::getKey)
+                .toList();
+    }
+
+    // method that gets a list of 3 students from school who have higher average marks from group, using stream
+    private static List<UUID> find3BestStudentsInGroupStream(List<Activity> activities, UUID groupId) {
+        var activitiesForGroup = findActivitiesForSpecificGroup(activities, groupId);
+        return find3BestStudentsInSchoolStream(activitiesForGroup);
+    }
+
+    private static List<Activity> findActivitiesForSpecificGroup(List<Activity> activities, UUID groupId) {
+        return activities.stream()
+                .filter(e -> e.getStudent().getGroup().getId().equals(groupId))
                 .toList();
     }
 }
