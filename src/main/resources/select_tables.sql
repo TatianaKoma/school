@@ -40,3 +40,12 @@ FROM activities
 GROUP BY student_id
 ORDER BY avg_mark DESC
 LIMIT 3;
+
+-- select a top 3 students from the group who has higher average mark
+SELECT student_id, AVG(COALESCE(mark,0)) AS avg_mark
+FROM activities AS a
+         JOIN students AS s ON s.id = a.student_id
+WHERE s.group_id = 'db0a3bff-2e9d-4835-8139-a9601f5e75da'
+GROUP BY student_id
+ORDER BY avg_mark DESC
+LIMIT 3;
