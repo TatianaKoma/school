@@ -9,6 +9,7 @@ import com.example.school.model.Teacher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -98,30 +99,35 @@ public class SchoolApplication {
                 .group(group1B)
                 .build();
         var student5 = Student.builder()
+                .id(UUID.fromString("bae0921b-f143-4ce8-ac0d-6b56b68de7da"))
                 .name("Svetlana")
                 .surname("Limova")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group1B)
                 .build();
         var student6 = Student.builder()
+                .id(UUID.fromString("d98cd650-c82f-4db4-a81d-b1c50a16fbce"))
                 .name("Maria")
                 .surname("Belova")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group1B)
                 .build();
         var student7 = Student.builder()
+                .id(UUID.fromString("092cc6bb-2e10-496d-848e-3580d12fe3d6"))
                 .name("Elena")
                 .surname("Kolesova")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group2A)
                 .build();
         var student8 = Student.builder()
+                .id(UUID.fromString("18eee600-30d1-436c-a213-2886668f81cd"))
                 .name("Olexandr")
                 .surname("Litvinov")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group2A)
                 .build();
         var student9 = Student.builder()
+                .id(UUID.fromString("7c2938f7-43f2-462d-b59a-4d1ad34f7060"))
                 .name("Sophia")
                 .surname("Minina")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
@@ -234,17 +240,124 @@ public class SchoolApplication {
                 .isPresent(false)
                 .build();
 
+        var lesson1Student5Mark7 = Activity.builder()
+                .lesson(lesson1)
+                .student(student5)
+                .mark(Optional.of(7))
+                .isPresent(true)
+                .build();
+        var lesson2Student5Mark6 = Activity.builder()
+                .lesson(lesson2)
+                .student(student5)
+                .mark(Optional.of(6))
+                .isPresent(true)
+                .build();
+        var lesson3Student5Mark5 = Activity.builder()
+                .lesson(lesson3)
+                .student(student5)
+                .mark(Optional.of(5))
+                .isPresent(true)
+                .build();
+
+        var lesson1Student6Mark10 = Activity.builder()
+                .lesson(lesson1)
+                .student(student6)
+                .mark(Optional.of(10))
+                .isPresent(true)
+                .build();
+        var lesson2Student6Mark9 = Activity.builder()
+                .lesson(lesson2)
+                .student(student6)
+                .mark(Optional.of(9))
+                .isPresent(true)
+                .build();
+        var lesson3Student6Mark5 = Activity.builder()
+                .lesson(lesson3)
+                .student(student6)
+                .mark(Optional.of(5))
+                .isPresent(true)
+                .build();
+
+        var lesson1Student7Mark12 = Activity.builder()
+                .lesson(lesson1)
+                .student(student7)
+                .mark(Optional.of(12))
+                .isPresent(true)
+                .build();
+        var lesson2Student7Mark10 = Activity.builder()
+                .lesson(lesson2)
+                .student(student7)
+                .mark(Optional.of(10))
+                .isPresent(true)
+                .build();
+        var lesson3Student7NoMark = Activity.builder()
+                .lesson(lesson3)
+                .student(student7)
+                .mark(Optional.empty())
+                .isPresent(true)
+                .build();
+
+        var lesson1Student8Mark5 = Activity.builder()
+                .lesson(lesson1)
+                .student(student8)
+                .mark(Optional.of(5))
+                .isPresent(true)
+                .build();
+        var lesson2Student8NoMark = Activity.builder()
+                .lesson(lesson2)
+                .student(student8)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+        var lesson3Student8Mark6 = Activity.builder()
+                .lesson(lesson3)
+                .student(student8)
+                .mark(Optional.of(6))
+                .isPresent(true)
+                .build();
+
+        var lesson1Student9Mark12 = Activity.builder()
+                .lesson(lesson1)
+                .student(student9)
+                .mark(Optional.of(12))
+                .isPresent(true)
+                .build();
+        var lesson2Student9Mark9 = Activity.builder()
+                .lesson(lesson2)
+                .student(student9)
+                .mark(Optional.of(9))
+                .isPresent(true)
+                .build();
+        var lesson3Student9NoMark = Activity.builder()
+                .lesson(lesson3)
+                .student(student9)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+
         var activities = List.of(
                 lesson1Student1Mark12, lesson2Student1Mark12, lesson3Student1Mark12,
                 lesson1Student2Mark10, lesson2Student2Mark10, lesson3Student2Mark10,
                 lesson1Student3Mark12, lesson2Student3NoMark, lesson3Student3NoMark,
                 lesson1Student4NoMark, lesson2Student4NoMark, lesson3Student4NoMark
         );
+        var activities1 = List.of(
+                lesson1Student1Mark12, lesson2Student1Mark12, lesson3Student1Mark12,
+                lesson1Student2Mark10, lesson2Student2Mark10, lesson3Student2Mark10,
+                lesson1Student3Mark12, lesson2Student3NoMark, lesson3Student3NoMark,
+                lesson1Student4NoMark, lesson2Student4NoMark, lesson3Student4NoMark,
+                lesson1Student5Mark7, lesson2Student5Mark6, lesson3Student5Mark5,
+                lesson1Student6Mark10, lesson2Student6Mark9, lesson3Student6Mark5,
+                lesson1Student7Mark12, lesson2Student7Mark10, lesson3Student7NoMark,
+                lesson1Student8Mark5, lesson2Student8NoMark, lesson3Student8Mark6,
+                lesson1Student9Mark12, lesson2Student9Mark9, lesson3Student9NoMark
+        );
         System.out.println(findBestTruantsInSchool(activities));
         System.out.println(findBestTruantsInGroup(activities, group1A.getId()));
         System.out.println(find3BestStudentsInSchool(activities));
         System.out.println(find3BestStudentsInSchoolStream(activities));
-        System.out.println(find3BestStudentsInGroupStream(activities,group1A.getId()));
+        System.out.println(find3BestStudentsInGroupStream(activities, group1A.getId()));
+        System.out.println(findStudentsAbsentInSpecificDay(activities1, lesson3.getStartDate()));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
@@ -331,5 +444,16 @@ public class SchoolApplication {
         return activities.stream()
                 .filter(e -> e.getStudent().getGroup().getId().equals(groupId))
                 .toList();
+    }
+
+    //method that get a list of students who was absent in specific day
+    private static List<UUID> findStudentsAbsentInSpecificDay(List<Activity> activities, OffsetDateTime date) {
+        var falseActivitiesInSpecificDate = activities.stream()
+                .filter(e -> e.getLesson().getStartDate().equals(date))
+                .filter(e -> !e.isPresent())
+                .toList();
+        return falseActivitiesInSpecificDate.stream()
+                .map(e -> e.getStudent().getId())
+                .collect(Collectors.toList());
     }
 }

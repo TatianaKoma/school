@@ -35,17 +35,24 @@ FROM truants
 WHERE truancies_rank = 1;
 
 -- select a top 3 students from the school who has higher average mark
-SELECT student_id, AVG(COALESCE(mark,0)) AS avg_mark
+SELECT student_id, AVG(COALESCE(mark, 0)) AS avg_mark
 FROM activities
 GROUP BY student_id
 ORDER BY avg_mark DESC
 LIMIT 3;
 
 -- select a top 3 students from the group who has higher average mark
-SELECT student_id, AVG(COALESCE(mark,0)) AS avg_mark
+SELECT student_id, AVG(COALESCE(mark, 0)) AS avg_mark
 FROM activities AS a
          JOIN students AS s ON s.id = a.student_id
 WHERE s.group_id = 'db0a3bff-2e9d-4835-8139-a9601f5e75da'
 GROUP BY student_id
 ORDER BY avg_mark DESC
 LIMIT 3;
+
+--select a list of students who was absent at specific date
+SELECT student_id
+FROM activities AS a
+         JOIN lessons l on l.id = a.lesson_id
+WHERE is_present = false
+  AND l.start_date = '2022-09-17 11:30:00.000000 +00:00';
