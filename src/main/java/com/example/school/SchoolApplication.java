@@ -448,12 +448,10 @@ public class SchoolApplication {
 
     //method that get a list of students who was absent in specific day
     private static List<UUID> findStudentsAbsentInSpecificDay(List<Activity> activities, OffsetDateTime date) {
-        var falseActivitiesInSpecificDate = activities.stream()
+        return activities.stream()
                 .filter(e -> e.getLesson().getStartDate().equals(date))
                 .filter(e -> !e.isPresent())
-                .toList();
-        return falseActivitiesInSpecificDate.stream()
                 .map(e -> e.getStudent().getId())
-                .collect(Collectors.toList());
+                .toList();
     }
 }
