@@ -86,3 +86,6 @@ VALUES ('281ba1dd-cda9-4c6e-846f-c67b30c20de1', 'a6ae5189-f528-4bed-837a-c4d56cf
 
 INSERT INTO activities (lesson_id, student_id, mark, is_present)
 VALUES  ('6aed2872-0756-40c8-8827-d835f666f3fe', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 10, false);
+
+INSERT INTO activities (lesson_id, student_id, mark, is_present)
+VALUES  ('281ba1dd-cda9-4c6e-846f-c67b30c20de1', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 10, true);
