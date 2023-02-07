@@ -83,3 +83,18 @@ VALUES ('281ba1dd-cda9-4c6e-846f-c67b30c20de1', 'a6ae5189-f528-4bed-837a-c4d56cf
        ('636505be-e092-452e-8410-c6789cb4026f', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 12, true),
        ('8ee73399-3d62-4c16-9531-abd21553fde2', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 9, true),
        ('6aed2872-0756-40c8-8827-d835f666f3fe', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', null, false);
+
+
+INSERT INTO activities (lesson_id, student_id, mark, is_present)
+VALUES ('6aed2872-0756-40c8-8827-d835f666f3fe', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 10, false);
+
+UPDATE activities
+SET mark= 10, is_present= false
+WHERE id = '8f26391f-2503-4f7f-9418-c835f2ab568b';
+
+INSERT INTO activities (lesson_id, student_id, mark, is_present)
+VALUES ('281ba1dd-cda9-4c6e-846f-c67b30c20de1', '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 10, true);
+
+UPDATE activities
+SET lesson_id ='281ba1dd-cda9-4c6e-846f-c67b30c20de1', student_id = '7c2938f7-43f2-462d-b59a-4d1ad34f7060'
+WHERE id = '8f26391f-2503-4f7f-9418-c835f2ab568b';
