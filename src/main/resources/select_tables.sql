@@ -51,8 +51,8 @@ ORDER BY avg_mark DESC
 LIMIT 3;
 
 --select a list of students who was absent at specific date
-SELECT a.student_id
+SELECT DISTINCT a.student_id
 FROM activities AS a
          JOIN lessons AS l on l.id = a.lesson_id
 WHERE a.is_present = false
-  AND l.start_date = '2022-09-17 11:30:00.000000 +00:00';
+  AND l.start_date BETWEEN '2022-09-21T08:00:00+01:00' AND '2022-09-21T12:00:00+01:00';

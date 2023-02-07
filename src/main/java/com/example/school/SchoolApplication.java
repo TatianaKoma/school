@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -41,17 +42,17 @@ public class SchoolApplication {
                 .name("english")
                 .build();
 
-        var teacher1 = Teacher.builder()
+        var teacherIrinaKoroseva = Teacher.builder()
                 .name("Irina")
                 .surname("Koroseva")
                 .startDate(parse("2000-09-01T09:00:00+01:00"))
                 .build();
-        var teacher2 = Teacher.builder()
+        var teacherLevFridman = Teacher.builder()
                 .name("Lev")
                 .surname("Fridman")
                 .startDate(parse("2019-09-01T09:00:00+01:00"))
                 .build();
-        var teacher3 = Teacher.builder()
+        var teacherTamaraMishina = Teacher.builder()
                 .name("Tamara")
                 .surname("Mishina")
                 .startDate(parse("2016-09-01T09:00:00+01:00"))
@@ -59,74 +60,76 @@ public class SchoolApplication {
 
         var group1A = Group.builder()
                 .name("1A")
-                .lead(teacher1)
+                .lead(teacherIrinaKoroseva)
                 .build();
         var group1B = Group.builder()
                 .name("1B")
-                .lead(teacher2)
+                .lead(teacherTamaraMishina)
                 .build();
         var group2A = Group.builder()
                 .name("2A")
-                .lead(teacher3)
+                .lead(teacherLevFridman)
                 .build();
 
-        var student1 = Student.builder()
+        var studentIgorPetrov1A = Student.builder()
                 .id(UUID.fromString("a6ae5189-f528-4bed-837a-c4d56cf9b6bb"))
                 .name("Igor")
                 .surname("Petrov")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group1A)
                 .build();
-        var student2 = Student.builder()
+        var studentOlegIvanov1A = Student.builder()
                 .id(UUID.fromString("085fc066-113c-4065-93cc-d3ab16bcf4e7"))
                 .name("Oleg")
                 .surname("Ivanov")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group1A)
                 .build();
-        var student3 = Student.builder()
+        var studentMaximSvetlov1A = Student.builder()
                 .id(UUID.fromString("b59cbbb6-ab12-441b-8f1f-e7dcdffd2010"))
                 .name("Maxim")
                 .surname("Svetlov")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group1A)
                 .build();
-        var student4 = Student.builder()
+
+        var studentIrinaKasanova1B = Student.builder()
                 .id(UUID.fromString("0e16ddd0-a9f3-4f5e-901b-824808cd4aa3"))
                 .name("Irina")
                 .surname("Kasanova")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group1B)
                 .build();
-        var student5 = Student.builder()
+        var studentSvetlanaLimova1B = Student.builder()
                 .id(UUID.fromString("bae0921b-f143-4ce8-ac0d-6b56b68de7da"))
                 .name("Svetlana")
                 .surname("Limova")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group1B)
                 .build();
-        var student6 = Student.builder()
+        var studentMariaBelova1B = Student.builder()
                 .id(UUID.fromString("d98cd650-c82f-4db4-a81d-b1c50a16fbce"))
                 .name("Maria")
                 .surname("Belova")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group1B)
                 .build();
-        var student7 = Student.builder()
+
+        var studentElenaKolesova2A = Student.builder()
                 .id(UUID.fromString("092cc6bb-2e10-496d-848e-3580d12fe3d6"))
                 .name("Elena")
                 .surname("Kolesova")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group2A)
                 .build();
-        var student8 = Student.builder()
+        var studentOlexandrLitvinov2A = Student.builder()
                 .id(UUID.fromString("18eee600-30d1-436c-a213-2886668f81cd"))
                 .name("Olexandr")
                 .surname("Litvinov")
                 .startDate(parse("2022-09-01T09:00:00+01:00"))
                 .group(group2A)
                 .build();
-        var student9 = Student.builder()
+        var studentSophiaMinina2A = Student.builder()
                 .id(UUID.fromString("7c2938f7-43f2-462d-b59a-4d1ad34f7060"))
                 .name("Sophia")
                 .surname("Minina")
@@ -134,230 +137,274 @@ public class SchoolApplication {
                 .group(group2A)
                 .build();
 
-        var lesson1 = Lesson.builder()
+        var mathLessonFor1A = Lesson.builder()
                 .subject(maths)
-                .teacher(teacher1)
+                .teacher(teacherIrinaKoroseva)
                 .group(group1A)
                 .topic("Addition")
+                .startDate(parse("2022-09-21T09:00:00+01:00"))
+                .build();
+        var writingLessonFor1A = Lesson.builder()
+                .subject(writing)
+                .teacher(teacherIrinaKoroseva)
+                .group(group1A)
+                .topic("Alphabet")
+                .startDate(parse("2022-09-21T10:00:00+01:00"))
+                .build();
+        var englishLessonFor1A = Lesson.builder()
+                .subject(english)
+                .teacher(teacherLevFridman)
+                .group(group1A)
+                .topic("Articles")
                 .startDate(parse("2022-09-21T11:00:00+01:00"))
                 .build();
-        var lesson2 = Lesson.builder()
+
+        var mathLessonFor1B = Lesson.builder()
+                .subject(maths)
+                .teacher(teacherTamaraMishina)
+                .group(group1B)
+                .topic("Addition")
+                .startDate(parse("2022-09-21T09:00:00+01:00"))
+                .build();
+        var writingLessonFor1B = Lesson.builder()
                 .subject(writing)
-                .teacher(teacher3)
+                .teacher(teacherTamaraMishina)
                 .group(group1B)
                 .topic("Alphabet")
                 .startDate(parse("2022-09-21T11:00:00+01:00"))
                 .build();
-        var lesson3 = Lesson.builder()
+        var englishLessonFor1B = Lesson.builder()
                 .subject(english)
-                .teacher(teacher2)
-                .group(group2A)
+                .teacher(teacherLevFridman)
+                .group(group1B)
                 .topic("Articles")
-                .startDate(parse("2022-09-17T12:30:00+01:00"))
+                .startDate(parse("2022-09-21T10:00:00+01:00"))
                 .build();
 
-        var students1A = List.of(student1, student2, student3);
-        var students1B = List.of(student4, student5, student6);
-        var students2A = List.of(student7, student8, student9);
+        var mathLessonFor2A = Lesson.builder()
+                .subject(maths)
+                .teacher(teacherTamaraMishina)
+                .group(group2A)
+                .topic("Equations")
+                .startDate(parse("2022-09-22T09:00:00+01:00"))
+                .build();
+        var readingLessonFor2A = Lesson.builder()
+                .subject(reading)
+                .teacher(teacherIrinaKoroseva)
+                .group(group2A)
+                .topic("Animal stories")
+                .startDate(parse("2022-09-22T10:00:00+01:00"))
+                .build();
+        var writingLessonFor2A = Lesson.builder()
+                .subject(writing)
+                .teacher(teacherLevFridman)
+                .group(group2A)
+                .topic("Parts of speech")
+                .startDate(parse("2022-09-22T11:00:00+01:00"))
+                .build();
+
+        var students1A = List.of(studentIgorPetrov1A, studentMaximSvetlov1A, studentOlegIvanov1A);
+        var students1B = List.of(studentSvetlanaLimova1B, studentIrinaKasanova1B, studentMariaBelova1B);
+        var students2A = List.of(studentElenaKolesova2A, studentOlexandrLitvinov2A, studentSophiaMinina2A);
 
         group1A.setStudents(students1A);
         group1B.setStudents(students1B);
         group2A.setStudents(students2A);
 
-        var lesson1Student1Mark12 = Activity.builder()
-                .lesson(lesson1)
-                .student(student1)
+        var mathIgorPetrov1Mark12 = Activity.builder()
+                .lesson(mathLessonFor1A)
+                .student(studentIgorPetrov1A)
                 .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
-        var lesson2Student1Mark12 = Activity.builder()
-                .lesson(lesson2)
-                .student(student1)
+        var writingIgorPetrovMark12 = Activity.builder()
+                .lesson(writingLessonFor1A)
+                .student(studentIgorPetrov1A)
                 .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
-        var lesson3Student1Mark12 = Activity.builder()
-                .lesson(lesson3)
-                .student(student1)
+        var englishIgorPetrovMark12 = Activity.builder()
+                .lesson(englishLessonFor1A)
+                .student(studentIgorPetrov1A)
                 .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
 
-        var lesson1Student2Mark10 = Activity.builder()
-                .lesson(lesson1)
-                .student(student2)
+        var mathOlegIvanovMark10 = Activity.builder()
+                .lesson(mathLessonFor1A)
+                .student(studentOlegIvanov1A)
                 .mark(Optional.of(10))
                 .isPresent(true)
                 .build();
-        var lesson2Student2Mark10 = Activity.builder()
-                .lesson(lesson2)
-                .student(student2)
+        var writingOlegIvanovMark10 = Activity.builder()
+                .lesson(writingLessonFor1A)
+                .student(studentOlegIvanov1A)
                 .mark(Optional.of(10))
                 .isPresent(true)
                 .build();
-        var lesson3Student2Mark10 = Activity.builder()
-                .lesson(lesson3)
-                .student(student2)
+        var englishOlegIvanovMark10 = Activity.builder()
+                .lesson(englishLessonFor1A)
+                .student(studentOlegIvanov1A)
                 .mark(Optional.of(10))
                 .isPresent(true)
                 .build();
 
-        var lesson1Student3Mark12 = Activity.builder()
-                .lesson(lesson1)
-                .student(student3)
+        var mathMaximSvetlovMark12 = Activity.builder()
+                .lesson(mathLessonFor1A)
+                .student(studentMaximSvetlov1A)
                 .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
-        var lesson2Student3NoMark = Activity.builder()
-                .lesson(lesson2)
-                .student(student3)
+        var writingMaximSvetlovNoMark = Activity.builder()
+                .lesson(writingLessonFor1A)
+                .student(studentMaximSvetlov1A)
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
-        var lesson3Student3NoMark = Activity.builder()
-                .lesson(lesson3)
-                .student(student3)
-                .mark(Optional.empty())
-                .isPresent(false)
-                .build();
-
-        var lesson1Student4NoMark = Activity.builder()
-                .lesson(lesson1)
-                .student(student4)
-                .mark(Optional.empty())
-                .isPresent(false)
-                .build();
-        var lesson2Student4NoMark = Activity.builder()
-                .lesson(lesson2)
-                .student(student4)
-                .mark(Optional.empty())
-                .isPresent(false)
-                .build();
-        var lesson3Student4NoMark = Activity.builder()
-                .lesson(lesson3)
-                .student(student4)
+        var englishMaximSvetlovNoMark = Activity.builder()
+                .lesson(englishLessonFor1A)
+                .student(studentMaximSvetlov1A)
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
 
-        var lesson1Student5Mark7 = Activity.builder()
-                .lesson(lesson1)
-                .student(student5)
+        var mathIrinaKasanovaNoMark = Activity.builder()
+                .lesson(mathLessonFor1B)
+                .student(studentIrinaKasanova1B)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+        var writingIrinaKasanovaNoMark = Activity.builder()
+                .lesson(writingLessonFor1B)
+                .student(studentIrinaKasanova1B)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+        var englishIrinaKasanovaNoMark = Activity.builder()
+                .lesson(englishLessonFor1B)
+                .student(studentIrinaKasanova1B)
+                .mark(Optional.empty())
+                .isPresent(false)
+                .build();
+
+        var mathSvetlanaLimovaMark7 = Activity.builder()
+                .lesson(mathLessonFor1B)
+                .student(studentSvetlanaLimova1B)
                 .mark(Optional.of(7))
                 .isPresent(true)
                 .build();
-        var lesson2Student5Mark6 = Activity.builder()
-                .lesson(lesson2)
-                .student(student5)
+        var writingSvetlanaLimovaMark6 = Activity.builder()
+                .lesson(writingLessonFor1B)
+                .student(studentSvetlanaLimova1B)
                 .mark(Optional.of(6))
                 .isPresent(true)
                 .build();
-        var lesson3Student5Mark5 = Activity.builder()
-                .lesson(lesson3)
-                .student(student5)
+        var englishSvetlanaLimovaMark5 = Activity.builder()
+                .lesson(englishLessonFor1B)
+                .student(studentSvetlanaLimova1B)
                 .mark(Optional.of(5))
                 .isPresent(true)
                 .build();
 
-        var lesson1Student6Mark10 = Activity.builder()
-                .lesson(lesson1)
-                .student(student6)
+        var mathMariaBelovaMark10 = Activity.builder()
+                .lesson(mathLessonFor1B)
+                .student(studentMariaBelova1B)
                 .mark(Optional.of(10))
                 .isPresent(true)
                 .build();
-        var lesson2Student6Mark9 = Activity.builder()
-                .lesson(lesson2)
-                .student(student6)
+        var writingMariaBelovaMark9 = Activity.builder()
+                .lesson(writingLessonFor1B)
+                .student(studentMariaBelova1B)
                 .mark(Optional.of(9))
                 .isPresent(true)
                 .build();
-        var lesson3Student6Mark5 = Activity.builder()
-                .lesson(lesson3)
-                .student(student6)
+        var englishMariaBelovaMark5 = Activity.builder()
+                .lesson(englishLessonFor1B)
+                .student(studentMariaBelova1B)
                 .mark(Optional.of(5))
                 .isPresent(true)
                 .build();
 
-        var lesson1Student7Mark12 = Activity.builder()
-                .lesson(lesson1)
-                .student(student7)
+        var mathElenaKolesovaMark12 = Activity.builder()
+                .lesson(mathLessonFor2A)
+                .student(studentElenaKolesova2A)
                 .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
-        var lesson2Student7Mark10 = Activity.builder()
-                .lesson(lesson2)
-                .student(student7)
+        var readingElenaKolesovaMark10 = Activity.builder()
+                .lesson(readingLessonFor2A)
+                .student(studentElenaKolesova2A)
                 .mark(Optional.of(10))
                 .isPresent(true)
                 .build();
-        var lesson3Student7NoMark = Activity.builder()
-                .lesson(lesson3)
-                .student(student7)
+        var writingElenaKolesovaNoMark = Activity.builder()
+                .lesson(writingLessonFor2A)
+                .student(studentElenaKolesova2A)
                 .mark(Optional.empty())
                 .isPresent(true)
                 .build();
 
-        var lesson1Student8Mark5 = Activity.builder()
-                .lesson(lesson1)
-                .student(student8)
+        var mathOlexandrLitvinovMark5 = Activity.builder()
+                .lesson(mathLessonFor2A)
+                .student(studentOlexandrLitvinov2A)
                 .mark(Optional.of(5))
                 .isPresent(true)
                 .build();
-        var lesson2Student8NoMark = Activity.builder()
-                .lesson(lesson2)
-                .student(student8)
+        var readingOlexandrLitvinovNoMark = Activity.builder()
+                .lesson(readingLessonFor2A)
+                .student(studentOlexandrLitvinov2A)
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
-        var lesson3Student8Mark6 = Activity.builder()
-                .lesson(lesson3)
-                .student(student8)
+        var writingOlexandrLitvinovMark6 = Activity.builder()
+                .lesson(writingLessonFor2A)
+                .student(studentOlexandrLitvinov2A)
                 .mark(Optional.of(6))
                 .isPresent(true)
                 .build();
 
-        var lesson1Student9Mark12 = Activity.builder()
-                .lesson(lesson1)
-                .student(student9)
+        var mathSophiaMininaMark12 = Activity.builder()
+                .lesson(mathLessonFor2A)
+                .student(studentSophiaMinina2A)
                 .mark(Optional.of(12))
                 .isPresent(true)
                 .build();
-        var lesson2Student9Mark9 = Activity.builder()
-                .lesson(lesson2)
-                .student(student9)
+        var readingSophiaMininaMark9 = Activity.builder()
+                .lesson(readingLessonFor2A)
+                .student(studentSophiaMinina2A)
                 .mark(Optional.of(9))
                 .isPresent(true)
                 .build();
-        var lesson3Student9NoMark = Activity.builder()
-                .lesson(lesson3)
-                .student(student9)
+        var writingSophiaMininaNoMark = Activity.builder()
+                .lesson(writingLessonFor2A)
+                .student(studentSophiaMinina2A)
                 .mark(Optional.empty())
                 .isPresent(false)
                 .build();
 
         var activities = List.of(
-                lesson1Student1Mark12, lesson2Student1Mark12, lesson3Student1Mark12,
-                lesson1Student2Mark10, lesson2Student2Mark10, lesson3Student2Mark10,
-                lesson1Student3Mark12, lesson2Student3NoMark, lesson3Student3NoMark,
-                lesson1Student4NoMark, lesson2Student4NoMark, lesson3Student4NoMark
+                mathIgorPetrov1Mark12, writingIgorPetrovMark12, englishIgorPetrovMark12,
+                mathOlegIvanovMark10, writingOlegIvanovMark10, englishOlegIvanovMark10,
+                mathMaximSvetlovMark12, writingMaximSvetlovNoMark, englishMaximSvetlovNoMark,
+                mathIrinaKasanovaNoMark, writingIrinaKasanovaNoMark, englishIrinaKasanovaNoMark
         );
         var activities1 = List.of(
-                lesson1Student1Mark12, lesson2Student1Mark12, lesson3Student1Mark12,
-                lesson1Student2Mark10, lesson2Student2Mark10, lesson3Student2Mark10,
-                lesson1Student3Mark12, lesson2Student3NoMark, lesson3Student3NoMark,
-                lesson1Student4NoMark, lesson2Student4NoMark, lesson3Student4NoMark,
-                lesson1Student5Mark7, lesson2Student5Mark6, lesson3Student5Mark5,
-                lesson1Student6Mark10, lesson2Student6Mark9, lesson3Student6Mark5,
-                lesson1Student7Mark12, lesson2Student7Mark10, lesson3Student7NoMark,
-                lesson1Student8Mark5, lesson2Student8NoMark, lesson3Student8Mark6,
-                lesson1Student9Mark12, lesson2Student9Mark9, lesson3Student9NoMark
+                mathIgorPetrov1Mark12, writingIgorPetrovMark12, englishIgorPetrovMark12,
+                mathOlegIvanovMark10, writingOlegIvanovMark10, englishOlegIvanovMark10,
+                mathMaximSvetlovMark12, writingMaximSvetlovNoMark, englishMaximSvetlovNoMark,
+                mathIrinaKasanovaNoMark, writingIrinaKasanovaNoMark, englishIrinaKasanovaNoMark,
+                mathSvetlanaLimovaMark7, writingSvetlanaLimovaMark6, englishSvetlanaLimovaMark5,
+                mathMariaBelovaMark10, writingMariaBelovaMark9, englishMariaBelovaMark5,
+                mathElenaKolesovaMark12, readingElenaKolesovaMark10, writingElenaKolesovaNoMark,
+                mathOlexandrLitvinovMark5, readingOlexandrLitvinovNoMark, writingOlexandrLitvinovMark6,
+                mathSophiaMininaMark12, readingSophiaMininaMark9, writingSophiaMininaNoMark
         );
         System.out.println(findBestTruantsInSchool(activities));
         System.out.println(findBestTruantsInGroup(activities, group1A.getId()));
         System.out.println(find3BestStudentsInSchool(activities));
         System.out.println(find3BestStudentsInSchoolStream(activities));
-        System.out.println(find3BestStudentsInGroupStream(activities, group1A.getId()));
-        System.out.println(findStudentsAbsentInSpecificDay(activities1, lesson3.getStartDate()));
+        System.out.println(find3BestStudentsInGroupStream(activities1, group1B.getId()));
+        System.out.println(findStudentsAbsentInSpecificDay(activities1, OffsetDateTime.parse("2022-09-22T09:00:00+01:00")));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
@@ -403,8 +450,6 @@ public class SchoolApplication {
             existingStudentMarks.add(studentMark);
             studentMarks.put(studentId, existingStudentMarks);
         }
-        System.out.println(studentMarks);
-
         Map<UUID, Double> studentsWithAverageMark = new HashMap<>();
         for (Map.Entry<UUID, List<Integer>> entry : studentMarks.entrySet()) {
             studentsWithAverageMark.put(entry.getKey(), getAverageMark(entry.getValue()));
@@ -447,11 +492,11 @@ public class SchoolApplication {
     }
 
     //method that get a list of students who was absent in specific day
-    private static List<UUID> findStudentsAbsentInSpecificDay(List<Activity> activities, OffsetDateTime date) {
+    private static Set<UUID> findStudentsAbsentInSpecificDay(List<Activity> activities, OffsetDateTime date) {
         return activities.stream()
-                .filter(e -> e.getLesson().getStartDate().equals(date))
+                .filter(e -> e.getLesson().getStartDate().toLocalDate().equals(date.toLocalDate()))
                 .filter(e -> !e.isPresent())
                 .map(e -> e.getStudent().getId())
-                .toList();
+                .collect(Collectors.toSet());
     }
 }
