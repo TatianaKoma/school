@@ -10,7 +10,6 @@ BEGIN
 END ;
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trigger_before_insert_mark ON activities;
 CREATE TRIGGER trigger_before_insert_mark
     BEFORE INSERT OR UPDATE
     ON activities
@@ -29,13 +28,12 @@ BEGIN
         FROM students AS s
         WHERE s.id = NEW.student_id)
     THEN
-        RAISE EXCEPTION 'this student can not be present at this lesson';
+        RAISE EXCEPTION 'this student can not be present at this lesson, because this lesson is for students from another group';
     END IF;
     RETURN NEW;
 END ;
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trigger_before_insert_student ON activities;
 CREATE TRIGGER trigger_before_insert_student
     BEFORE INSERT OR UPDATE
     ON activities
