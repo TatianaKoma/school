@@ -53,13 +53,13 @@ LIMIT 3;
 --select a list of students who was absent at specific date
 SELECT DISTINCT a.student_id
 FROM activities AS a
-         JOIN lessons AS l on l.id = a.lesson_id
+         JOIN lessons AS l ON l.id = a.lesson_id
 WHERE a.is_present = false
   AND l.start_date BETWEEN '2022-09-21T08:00:00+01:00' AND '2022-09-21T12:00:00+01:00';
 
 --select a number of lessons from this teacher at specific date
 SELECT COUNT(DISTINCT a.lesson_id)
 FROM activities AS a
-         JOIN lessons AS l on l.id = a.lesson_id
+         JOIN lessons AS l ON l.id = a.lesson_id
 WHERE l.start_date BETWEEN '2022-09-21T08:00:00+01:00' AND '2022-09-21T12:00:00+01:00'
   AND l.teacher_id = '5d371d6c-7d15-470e-be73-844fdb7a0e06';
