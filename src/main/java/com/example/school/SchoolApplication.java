@@ -144,6 +144,20 @@ public class SchoolApplication {
                 .topic("Addition")
                 .startDate(parse("2022-09-21T09:00:00+01:00"))
                 .build();
+        var math2LessonFor1A = Lesson.builder()
+                .subject(maths)
+                .teacher(teacherIrinaKoroseva)
+                .group(group1A)
+                .topic("Subtraction")
+                .startDate(parse("2022-09-23T09:00:00+01:00"))
+                .build();
+        var math3LessonFor1A = Lesson.builder()
+                .subject(maths)
+                .teacher(teacherIrinaKoroseva)
+                .group(group1A)
+                .topic("Division")
+                .startDate(parse("2022-09-24T09:00:00+01:00"))
+                .build();
         var writingLessonFor1A = Lesson.builder()
                 .subject(writing)
                 .teacher(teacherIrinaKoroseva)
@@ -215,6 +229,18 @@ public class SchoolApplication {
                 .lesson(mathLessonFor1A)
                 .student(studentIgorPetrov1A)
                 .mark(Optional.of(12))
+                .isPresent(true)
+                .build();
+        var math2IgorPetrov1Mark9 = Activity.builder()
+                .lesson(math2LessonFor1A)
+                .student(studentIgorPetrov1A)
+                .mark(Optional.of(9))
+                .isPresent(true)
+                .build();
+        var math3IgorPetrov1NoMark = Activity.builder()
+                .lesson(math3LessonFor1A)
+                .student(studentIgorPetrov1A)
+                .mark(Optional.empty())
                 .isPresent(true)
                 .build();
         var writingIgorPetrovMark12 = Activity.builder()
@@ -389,7 +415,8 @@ public class SchoolApplication {
                 mathIrinaKasanovaNoMark, writingIrinaKasanovaNoMark, englishIrinaKasanovaNoMark
         );
         var activities1 = List.of(
-                mathIgorPetrov1Mark12, writingIgorPetrovMark12, englishIgorPetrovMark12,
+                mathIgorPetrov1Mark12, math2IgorPetrov1Mark9, math3IgorPetrov1NoMark, writingIgorPetrovMark12,
+                englishIgorPetrovMark12,
                 mathOlegIvanovMark10, writingOlegIvanovMark10, englishOlegIvanovMark10,
                 mathMaximSvetlovMark12, writingMaximSvetlovNoMark, englishMaximSvetlovNoMark,
                 mathIrinaKasanovaNoMark, writingIrinaKasanovaNoMark, englishIrinaKasanovaNoMark,
@@ -409,8 +436,12 @@ public class SchoolApplication {
         System.out.println(find3BestStudentsInSchool(activities));
         System.out.println(find3BestStudentsInSchoolStream(activities));
         System.out.println(find3BestStudentsInGroupStream(activities1, group1B.getId()));
-        System.out.println(findStudentsAbsentAtSpecificDate(activities1, OffsetDateTime.parse("2022-09-22T09:00:00+01:00")));
-        System.out.println(findNumberLessonsFromTeacherAtSpecificDay(lessons, teacherIrinaKoroseva.getId(), OffsetDateTime.parse("2022-09-21T09:00:00+01:00")));
+        System.out.println(findStudentsAbsentAtSpecificDate(activities1,
+                OffsetDateTime.parse("2022-09-22T09:00:00+01:00")));
+        System.out.println(findNumberLessonsFromTeacherAtSpecificDay(lessons,
+                teacherIrinaKoroseva.getId(),
+                OffsetDateTime.parse("2022-09-21T09:00:00+01:00")));
+        System.out.println(findAvgMarkInSubject(activities1, studentIgorPetrov1A.getId(), maths.getId()));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
@@ -514,5 +545,14 @@ public class SchoolApplication {
                 .filter(lesson -> lesson.getStartDate().toLocalDate().equals(date.toLocalDate()))
                 .filter(lesson -> lesson.getTeacher().getId().equals(teacherId))
                 .count();
+    }
+
+    //method that find average mark of student in specific subject
+    private static double findAvgMarkInSubject(List<Activity> activities, UUID studentId, UUID subjectId) {
+        return activities.stream()
+                .filter(e -> e.getStudent().getId().equals(studentId))
+                .filter(e -> e.getLesson().getSubject().getId().equals(subjectId))
+                .filter(Activity::isPresent)
+                .collect(averagingDouble(e -> e.getMark().orElse(0)));
     }
 }

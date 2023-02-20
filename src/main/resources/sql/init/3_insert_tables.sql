@@ -128,3 +128,17 @@ VALUES ('9f10f9fc-9971-4e57-af45-2407fb793f4f', '281ba1dd-cda9-4c6e-846f-c67b30c
         '7c2938f7-43f2-462d-b59a-4d1ad34f7060', 9, true),
        ('8f26391f-2503-4f7f-9418-c835f2ab568b', '6aed2872-0756-40c8-8827-d835f666f3fe',
         '7c2938f7-43f2-462d-b59a-4d1ad34f7060', null, false);
+
+INSERT INTO lessons(id, subject_id, teacher_id, group_id, topic, start_date)
+VALUES ('a1f9ecb1-3a3e-43aa-95af-814c3b5a0117', 'a720cc69-6546-4607-b664-2ce1601f7d49',
+        '5d371d6c-7d15-470e-be73-844fdb7a0e06',
+        'b31fe8ed-c37a-4815-8c2a-4c413d8b138a', 'Subtraction', '2022-09-23T09:00:00+01:00'),
+       ('c74cddd4-3234-4467-90b1-43a14f5a0f46', 'a720cc69-6546-4607-b664-2ce1601f7d49',
+        '5d371d6c-7d15-470e-be73-844fdb7a0e06',
+        'b31fe8ed-c37a-4815-8c2a-4c413d8b138a', 'Division', '2022-09-24T09:00:00+01:00');
+
+INSERT INTO activities (id, lesson_id, student_id, mark, is_present)
+VALUES ('8e1d068c-b1c1-49e4-9e50-a7d21becd19d', 'a1f9ecb1-3a3e-43aa-95af-814c3b5a0117',
+        'a6ae5189-f528-4bed-837a-c4d56cf9b6bb', 9, true),
+       ('0b2991cb-596a-499f-8c6a-b6be81a47385', 'c74cddd4-3234-4467-90b1-43a14f5a0f46',
+        'a6ae5189-f528-4bed-837a-c4d56cf9b6bb', null, true);
