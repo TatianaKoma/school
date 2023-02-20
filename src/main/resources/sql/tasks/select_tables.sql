@@ -62,3 +62,11 @@ SELECT COUNT(l.id)
 FROM lessons AS l
 WHERE l.start_date BETWEEN '2022-09-21T08:00:00+01:00' AND '2022-09-21T12:00:00+01:00'
   AND l.teacher_id = '5d371d6c-7d15-470e-be73-844fdb7a0e06';
+
+--select average mark specific student ib spesific subject
+SELECT AVG(COALESCE(a.mark, 0)) AS avg_mark
+FROM activities AS a
+         JOIN lessons l on a.lesson_id = l.id
+WHERE l.subject_id = 'a720cc69-6546-4607-b664-2ce1601f7d49'
+  AND a.student_id = 'a6ae5189-f528-4bed-837a-c4d56cf9b6bb'
+  AND a.is_present = true;
