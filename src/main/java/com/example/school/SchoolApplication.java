@@ -399,12 +399,18 @@ public class SchoolApplication {
                 mathOlexandrLitvinovMark5, readingOlexandrLitvinovNoMark, writingOlexandrLitvinovMark6,
                 mathSophiaMininaMark12, readingSophiaMininaMark9, writingSophiaMininaNoMark
         );
+        var lessons = List.of(
+                mathLessonFor1A, writingLessonFor1A, englishLessonFor1A,
+                mathLessonFor1B, writingLessonFor1B, englishLessonFor1B,
+                mathLessonFor2A, writingLessonFor2A, readingLessonFor2A
+        );
         System.out.println(findBestTruantsInSchool(activities));
         System.out.println(findBestTruantsInGroup(activities, group1A.getId()));
         System.out.println(find3BestStudentsInSchool(activities));
         System.out.println(find3BestStudentsInSchoolStream(activities));
         System.out.println(find3BestStudentsInGroupStream(activities1, group1B.getId()));
-        System.out.println(findStudentsAbsentInSpecificDay(activities1, OffsetDateTime.parse("2022-09-22T09:00:00+01:00")));
+        System.out.println(findStudentsAbsentAtSpecificDate(activities1, OffsetDateTime.parse("2022-09-22T09:00:00+01:00")));
+        System.out.println(findNumberLessonsFromTeacherAtSpecificDay(lessons, teacherIrinaKoroseva.getId(), OffsetDateTime.parse("2022-09-21T09:00:00+01:00")));
     }
 
     // method that gets a list of students from the school who skipped the most lessons
@@ -492,11 +498,21 @@ public class SchoolApplication {
     }
 
     //method that get a list of students who was absent in specific day
-    private static Set<UUID> findStudentsAbsentInSpecificDay(List<Activity> activities, OffsetDateTime date) {
+    private static Set<UUID> findStudentsAbsentAtSpecificDate(List<Activity> activities, OffsetDateTime date) {
         return activities.stream()
                 .filter(e -> e.getLesson().getStartDate().toLocalDate().equals(date.toLocalDate()))
                 .filter(e -> !e.isPresent())
                 .map(e -> e.getStudent().getId())
                 .collect(Collectors.toSet());
+    }
+
+    //method that get the number of lessons taught by a particular teacher on a particular day
+    private static long findNumberLessonsFromTeacherAtSpecificDay(List<Lesson> lessons,
+                                                                  UUID teacherId,
+                                                                  OffsetDateTime date) {
+        return lessons.stream()
+                .filter(lesson -> lesson.getStartDate().toLocalDate().equals(date.toLocalDate()))
+                .filter(lesson -> lesson.getTeacher().getId().equals(teacherId))
+                .count();
     }
 }
