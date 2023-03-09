@@ -555,5 +555,6 @@ public class SchoolApplication {
                 .filter(Activity::isPresent)
                 .collect(averagingDouble(e -> e.getMark().orElse(0)));
     }
-    //finish first task
+    // finish another task
+    // finish first task
 }
