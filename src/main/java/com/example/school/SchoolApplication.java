@@ -556,4 +556,5 @@ public class SchoolApplication {
                 .collect(averagingDouble(e -> e.getMark().orElse(0)));
     }
     // finish another task
+    // finish first task
 }
